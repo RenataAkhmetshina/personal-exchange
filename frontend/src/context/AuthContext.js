@@ -9,7 +9,6 @@ export function AuthProvider({ children }) {
   const [token, setToken] = useState(() => localStorage.getItem('pex_token'));
   const [loading, setLoading] = useState(true);
 
-  // Fetch current user on mount if token exists
   useEffect(() => {
     if (!token) {
       setLoading(false);
@@ -68,7 +67,6 @@ export function AuthProvider({ children }) {
     setUser(null);
   }, []);
 
-  // Called by trading routes to update local user state
   const updateUserState = useCallback((updates) => {
     setUser(prev => prev ? { ...prev, ...updates } : prev);
   }, []);

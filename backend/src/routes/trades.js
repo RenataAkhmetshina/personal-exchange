@@ -25,7 +25,6 @@ router.post('/buy', auth, async (req, res) => {
       return res.status(404).json({ error: 'Stock not found' });
     }
 
-    // Can't buy your own stock
     if (stock.owner.toString() === req.userId.toString()) {
       await session.abortTransaction();
       return res.status(400).json({ error: "You can't buy your own stock" });
@@ -42,7 +41,6 @@ router.post('/buy', auth, async (req, res) => {
       });
     }
 
-    // Atomic: deduct balance, add shares
     buyer.walletBalance -= totalCost;
     const currentShares = buyer.portfolio.get(stock.ticker) || 0;
     buyer.portfolio.set(stock.ticker, currentShares + shareCount);
@@ -98,7 +96,6 @@ router.post('/sell', auth, async (req, res) => {
 
     const totalRevenue = stock.price * shareCount;
 
-    // Atomic: add balance, remove shares
     seller.walletBalance += totalRevenue;
     const remaining = currentShares - shareCount;
     if (remaining === 0) {

@@ -14,7 +14,6 @@ export default function PortfolioPage({ prices }) {
 
   useEffect(() => {
     if (tickers.length === 0) { setLoading(false); return; }
-    // Fetch stock details for held tickers
     Promise.all(tickers.map(t =>
       apiFetch(`/api/stocks/${t}`, {}, token)
         .catch(() => null)
@@ -24,18 +23,16 @@ export default function PortfolioPage({ prices }) {
       setStocks(map);
       setLoading(false);
     });
-  }, [tickers.join(',')]); // eslint-disable-line
+  }, [tickers.join(',')]); 
 
   const fmt = (n) => '$' + Number(n || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-  // Calculate real-time portfolio value
   const portfolioValue = tickers.reduce((sum, t) => {
     const livePrice = prices[t] ?? stocks[t]?.price ?? 0;
     return sum + (portfolio[t] * livePrice);
   }, 0);
 
   const walletBalance = user?.walletBalance || 0;
-  // Valuation = Wallet Balance + (Shares Held × Current Price) — calculated client-side, never stored
   const totalNetWorth = walletBalance + portfolioValue;
 
   return (
@@ -45,27 +42,21 @@ export default function PortfolioPage({ prices }) {
           Portfolio
         </h1>
         <div style={{ color: 'var(--text3)', fontFamily: 'var(--font-mono)', fontSize: 12, marginBottom: 24 }}>
-          @{user?.username} · Real-time net worth calculated from live WebSocket prices
+          @{user?.username} · Net worth 
         </div>
 
-        {/* Net Worth Summary */}
+        {/* Total Net Worth */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 12, marginBottom: 24 }}>
           <div className="valuation-display">
             <div className="card-title" style={{ marginBottom: 8 }}>Total Net Worth</div>
             <div className={`big-num ${totalNetWorth < 0 ? 'negative' : ''}`}>
               {fmt(totalNetWorth)}
             </div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text3)', marginTop: 4 }}>
-              Wallet + Holdings · calculated in browser
-            </div>
           </div>
 
           <div className="card">
             <div className="card-title" style={{ marginBottom: 8 }}>Cash Balance</div>
             <div className="big-num">{fmt(walletBalance)}</div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: 11, color: 'var(--text3)', marginTop: 4 }}>
-              Available to trade
-            </div>
           </div>
 
           <div className="card">
@@ -89,7 +80,7 @@ export default function PortfolioPage({ prices }) {
             </div>
           ) : tickers.length === 0 ? (
             <div style={{ padding: 40, textAlign: 'center', color: 'var(--text3)', fontFamily: 'var(--font-mono)', fontSize: 12 }}>
-              No holdings yet. Head to the Market to start trading.
+              No holdings yet. 
             </div>
           ) : (
             <table className="stock-table">

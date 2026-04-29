@@ -28,7 +28,6 @@ function AppShell() {
   const { user } = useAuth();
   const { prices, connected, seedPrices } = usePexWebSocket();
 
-  // Calculate net worth in real-time from live prices — never stored on server
   const netWorth = useMemo(() => {
     if (!user) return 0;
     const portfolio = user.portfolio || {};

@@ -39,7 +39,7 @@ export default function AuthPage() {
       background: 'var(--bg)',
       padding: 24
     }}>
-      {/* Background decoration */}
+      {/* Background */}
       <div style={{
         position: 'fixed', inset: 0, overflow: 'hidden', pointerEvents: 'none', zIndex: 0
       }}>
@@ -94,7 +94,7 @@ export default function AuthPage() {
                 <input
                   className="form-input"
                   type="text"
-                  placeholder="satoshi"
+                  placeholder="your name"
                   value={form.username}
                   onChange={update('username')}
                   required
@@ -109,7 +109,7 @@ export default function AuthPage() {
               <input
                 className="form-input"
                 type="email"
-                placeholder="you@example.com"
+                placeholder="example@email.com"
                 value={form.email}
                 onChange={update('email')}
                 required
@@ -152,8 +152,6 @@ export default function AuthPage() {
               color: 'var(--text3)',
               lineHeight: 1.6
             }}>
-              🎉 New accounts start with <strong style={{ color: 'var(--accent)' }}>$10,000</strong> in wallet balance.
-              Issue your own stock and trade others!
             </div>
           )}
         </div>

@@ -26,9 +26,8 @@ export default function MarketPage({ prices, seedPrices }) {
 
   useEffect(() => {
     fetchStocks();
-  }, []); // eslint-disable-line
+  }, []); 
 
-  // Flash animation when price changes via WS
   useEffect(() => {
     const newFlash = {};
     Object.entries(prices).forEach(([ticker, price]) => {
@@ -65,7 +64,7 @@ export default function MarketPage({ prices, seedPrices }) {
           <div>
             <h1 style={{ fontSize: 28, fontWeight: 800, letterSpacing: -0.5 }}>Market</h1>
             <div style={{ color: 'var(--text3)', fontFamily: 'var(--font-mono)', fontSize: 12, marginTop: 4 }}>
-              {stocks.length} stocks listed · Prices update live via WebSocket
+              {stocks.length} stocks listed 
             </div>
           </div>
         </div>
@@ -78,7 +77,7 @@ export default function MarketPage({ prices, seedPrices }) {
           <div className="card" style={{ textAlign: 'center', padding: 60 }}>
             <div style={{ fontSize: 40, marginBottom: 12 }}>📈</div>
             <div style={{ fontFamily: 'var(--font-mono)', color: 'var(--text3)', fontSize: 13 }}>
-              No stocks listed yet. Be the first to issue yours!
+              No stocks listed yet. 
             </div>
           </div>
         ) : (

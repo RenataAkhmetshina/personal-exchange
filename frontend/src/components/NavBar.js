@@ -12,7 +12,7 @@ export default function NavBar({ connected, walletBalance, netWorth }) {
     <nav className="nav">
       <div className="container nav-inner">
         <Link to="/" className="nav-logo">
-          PEX<span>/</span>
+          PEX
         </Link>
 
         {user && (

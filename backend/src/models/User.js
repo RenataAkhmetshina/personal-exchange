@@ -27,7 +27,6 @@ const userSchema = new mongoose.Schema({
     default: 10000,
     min: 0
   },
-  // Portfolio: map of ticker -> shares held
   portfolio: {
     type: Map,
     of: Number,
@@ -35,7 +34,6 @@ const userSchema = new mongoose.Schema({
   }
 }, { timestamps: true });
 
-// Hash password before saving
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
   this.password = await bcrypt.hash(this.password, 12);
@@ -46,7 +44,6 @@ userSchema.methods.comparePassword = async function (candidatePassword) {
   return bcrypt.compare(candidatePassword, this.password);
 };
 
-// Never return password
 userSchema.methods.toJSON = function () {
   const obj = this.toObject();
   delete obj.password;

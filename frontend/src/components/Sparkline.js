@@ -17,7 +17,7 @@ export default function Sparkline({ data = [], width = 80, height = 28, color })
 
   const firstY = parseFloat(points[0].split(',')[1]);
   const lastY = parseFloat(points[points.length - 1].split(',')[1]);
-  const trending = lastY < firstY; // lower y = higher price (inverted SVG axis)
+  const trending = lastY < firstY; 
 
   const strokeColor = color || (trending ? '#00e5a0' : '#ff4466');
 

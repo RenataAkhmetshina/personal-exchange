@@ -3,19 +3,19 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg: #080c10;
-  --bg2: #0d1318;
-  --bg3: #111820;
-  --card: #121a22;
-  --border: #1e2d3d;
-  --border2: #243546;
-  --text: #e8f0f8;
-  --text2: #8fa6bc;
-  --text3: #4d6478;
-  --accent: #00e5a0;
-  --accent2: #00b87a;
-  --red: #ff4466;
-  --red2: #cc2244;
+  --bg: #ffffff;           
+  --bg2: #f8f9fa;         
+  --bg3: #f1f3f5;         
+  --card: #ffffff;       
+  --border: #dee2e6;      
+  --border2: #ced4da;    
+  --text: #212529;         
+  --text2: #495057;       
+  --text3: #adb5bd;        
+  --accent: #00e5a0;     
+  --accent2: #00b87a;      
+  --red: #ff4466;         
+  --red2: #cc2244;      
   --yellow: #ffd166;
   --blue: #4d9fff;
   --blue2: #2d7fdf;
@@ -23,7 +23,7 @@
   --font-sans: 'Syne', sans-serif;
   --radius: 6px;
   --radius2: 12px;
-  --shadow: 0 4px 24px rgba(0,0,0,0.5);
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
 }
 
 html, body { height: 100%; background: var(--bg); color: var(--text); }
@@ -91,7 +91,7 @@ body { font-family: var(--font-sans); font-size: 15px; line-height: 1.5; -webkit
   margin-right: 6px;
   transition: background 0.3s;
 }
-.ws-dot.connected { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
+.ws-dot.connected { background: var(--accent);}
 
 /* Wallet bar */
 .wallet-bar {

@@ -32,14 +32,13 @@ const stockSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  // Price history for sparkline (last 20 prices)
   priceHistory: {
     type: [Number],
     default: []
   },
   totalShares: {
     type: Number,
-    default: 1000000 // 1 million shares available
+    default: 1000000 
   }
 }, { timestamps: true });
 

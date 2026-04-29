@@ -28,7 +28,6 @@ router.get('/:ticker', async (req, res) => {
 // POST /api/stocks - create a new stock (one per user)
 router.post('/', auth, async (req, res) => {
   try {
-    // Check if user already has a stock
     const existing = await Stock.findOne({ owner: req.userId });
     if (existing) {
       return res.status(409).json({ error: `You already own the $${existing.ticker} stock` });
@@ -79,7 +78,6 @@ router.patch('/:ticker/price', auth, async (req, res) => {
 
     if (!stock) return res.status(404).json({ error: 'Stock not found' });
 
-    // 403 if not the owner
     if (stock.owner.toString() !== req.userId.toString()) {
       return res.status(403).json({ error: 'Forbidden: you do not own this stock' });
     }
@@ -91,14 +89,12 @@ router.patch('/:ticker/price', auth, async (req, res) => {
       return res.status(400).json({ error: 'Invalid price. Must be at least $0.01' });
     }
 
-    // Keep last 20 prices in history
     const updatedHistory = [...(stock.priceHistory || []), newPrice].slice(-20);
 
     stock.price = newPrice;
     stock.priceHistory = updatedHistory;
     await stock.save();
 
-    // Broadcast to all WebSocket clients
     broadcastTickerUpdate(stock.ticker, newPrice);
 
     res.json(stock);

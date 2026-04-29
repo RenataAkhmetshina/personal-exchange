@@ -3,12 +3,6 @@ import { useAuth } from '../context/AuthContext';
 
 const WS_URL = process.env.REACT_APP_WS_URL || 'ws://localhost:4000';
 
-/**
- * Manages the WebSocket connection to PEX.
- * Returns:
- *   - prices: { [ticker]: number } - live price map, updates on TICKER_UPDATE
- *   - connected: boolean
- */
 export function usePexWebSocket(initialPrices = {}) {
   const { token } = useAuth();
   const wsRef = useRef(null);
@@ -17,7 +11,6 @@ export function usePexWebSocket(initialPrices = {}) {
   const reconnectTimer = useRef(null);
   const isMounted = useRef(true);
 
-  // Seed prices from REST data whenever it changes
   const seedPrices = useCallback((stockList) => {
     const map = {};
     stockList.forEach(s => { map[s.ticker] = s.price; });
@@ -27,7 +20,6 @@ export function usePexWebSocket(initialPrices = {}) {
   const connect = useCallback(() => {
     if (!token || !isMounted.current) return;
 
-    // Pass JWT via Sec-WebSocket-Protocol header (only way browsers support)
     const ws = new WebSocket(WS_URL, token);
     wsRef.current = ws;
 
@@ -53,7 +45,6 @@ export function usePexWebSocket(initialPrices = {}) {
     ws.onclose = (event) => {
       if (!isMounted.current) return;
       setConnected(false);
-      // Auto-reconnect after 3s unless intentional close
       if (event.code !== 1000 && event.code !== 4001) {
         reconnectTimer.current = setTimeout(() => {
           if (isMounted.current) connect();
@@ -74,7 +65,7 @@ export function usePexWebSocket(initialPrices = {}) {
       isMounted.current = false;
       clearTimeout(reconnectTimer.current);
       if (wsRef.current) {
-        wsRef.current.onclose = null; // prevent reconnect on unmount
+        wsRef.current.onclose = null; 
         wsRef.current.close(1000, 'Component unmounted');
       }
     };

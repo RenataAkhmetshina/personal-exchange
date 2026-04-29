@@ -9,13 +9,10 @@ const { initWebSocketServer } = require('./ws/wsManager');
 const app = express();
 const server = http.createServer(app);
 
-// ─── WebSocket Server ────────────────────────────────────────────────────────
-// handleProtocols: echo back the token as accepted sub-protocol
-// This satisfies browsers that require at least one protocol to be accepted
+// WebSocket Server 
 const wss = new WebSocketServer({
   server,
   handleProtocols: (protocols) => {
-    // Accept the first protocol (which is the JWT token)
     const proto = [...protocols][0];
     return proto || false;
   }
@@ -23,7 +20,7 @@ const wss = new WebSocketServer({
 
 initWebSocketServer(wss);
 
-// ─── Middleware ──────────────────────────────────────────────────────────────
+// Middleware
 app.use(cors({
   origin: process.env.FRONTEND_URL || '*',
   methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
@@ -33,7 +30,7 @@ app.use(cors({
 
 app.use(express.json());
 
-// ─── Routes ─────────────────────────────────────────────────────────────────
+// Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/stocks', require('./routes/stocks'));
 app.use('/api/trades', require('./routes/trades'));
@@ -46,7 +43,7 @@ app.get('/health', (req, res) => {
   });
 });
 
-// ─── Database & Server Start ─────────────────────────────────────────────────
+// DB and server start
 const PORT = process.env.PORT || 4000;
 
 mongoose.connect(process.env.MONGODB_URI)
