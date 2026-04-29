@@ -13,7 +13,7 @@
   --text2: #495057;       
   --text3: #adb5bd;        
   --accent: #2d7fdf;       
-  --accent2: #1c5fb3;     
+  --accent2: #1c5fb3;      
   --red: #ff4466;         
   --red2: #cc2244;      
   --yellow: #ffd166;
@@ -148,10 +148,10 @@ body { font-family: var(--font-sans); font-size: 15px; line-height: 1.5; -webkit
   white-space: nowrap;
 }
 .btn:disabled { opacity: 0.4; cursor: not-allowed; }
-.btn-primary { background: var(--accent); color: #000; }
-.btn-primary:hover:not(:disabled) { background: #1c5fb3; }
+.btn-primary { background: var(--accent); color: #fff; } 
+.btn-primary:hover:not(:disabled) { background: var(--accent2); } 
 .btn-danger { background: var(--red); color: #fff; }
-.btn-danger:hover:not(:disabled) { background: #ff2255; }
+.btn-danger:hover:not(:disabled) { background: var(--red2); }
 .btn-ghost {
   background: transparent;
   border: 1px solid var(--border2);
@@ -196,8 +196,8 @@ body { font-family: var(--font-sans); font-size: 15px; line-height: 1.5; -webkit
   margin-top: 8px;
 }
 .form-success {
-  background: #f1f3f5;
-  border: 1px solid #dee2e6;
+  background: rgba(45, 127, 223, 0.1); 
+  border: 1px solid rgba(45, 127, 223, 0.3);
   color: var(--accent);
   padding: 10px 14px;
   border-radius: var(--radius);
@@ -211,8 +211,8 @@ body { font-family: var(--font-sans); font-size: 15px; line-height: 1.5; -webkit
   display: inline-flex;
   align-items: center;
   padding: 2px 8px;
-  background: #f1f3f5;
-  border: 1px solid #dee2e6;
+  background: rgba(45, 127, 223, 0.1); /* Blue glow */
+  border: 1px solid rgba(45, 127, 223, 0.3);
   border-radius: 4px;
   font-family: var(--font-mono);
   font-size: 12px;
@@ -223,7 +223,7 @@ body { font-family: var(--font-sans); font-size: 15px; line-height: 1.5; -webkit
 
 /* Price flash animation */
 @keyframes flashGreen {
-  0% { background: #f1f3f5 }
+  0% { background: rgba(45, 127, 223, 0.3); } 
   100% { background: transparent; }
 }
 @keyframes flashRed {
@@ -232,10 +232,6 @@ body { font-family: var(--font-sans); font-size: 15px; line-height: 1.5; -webkit
 }
 .price-up { animation: flashGreen 0.8s ease-out; }
 .price-down { animation: flashRed 0.8s ease-out; }
-
-/* Sparkline */
-.sparkline { overflow: visible; }
-.sparkline path { fill: none; stroke-width: 1.5; }
 
 /* Stock table */
 .stock-table { width: 100%; border-collapse: collapse; }
@@ -259,21 +255,6 @@ body { font-family: var(--font-sans); font-size: 15px; line-height: 1.5; -webkit
 }
 .stock-table tr:last-child td { border-bottom: none; }
 .stock-table tr:hover td { background: var(--bg3); }
-
-/* Portfolio grid */
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 12px;
-}
-.portfolio-item {
-  background: var(--bg3);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px;
-  transition: border-color 0.15s;
-}
-.portfolio-item:hover { border-color: var(--border2); }
 
 /* Big number display */
 .big-num {
@@ -304,39 +285,10 @@ body { font-family: var(--font-sans); font-size: 15px; line-height: 1.5; -webkit
 .tab-btn:hover { color: var(--text2); }
 .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
 
-/* Modal */
-.modal-overlay {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 200;
-  padding: 24px;
-}
-.modal {
-  background: var(--card);
-  border: 1px solid var(--border2);
-  border-radius: var(--radius2);
-  padding: 28px;
-  width: 100%;
-  max-width: 420px;
-  box-shadow: var(--shadow);
-}
-.modal-title {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
 /* Valuation display */
 .valuation-display {
-  background: linear-gradient(135deg, #f1f3f5, transparent);
-  border: 1px solid #dee2e6;
+  background: linear-gradient(135deg, rgba(45, 127, 223, 0.05), transparent); 
+  border: 1px solid rgba(45, 127, 223, 0.2);
   border-radius: var(--radius2);
   padding: 20px;
 }
