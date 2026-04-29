@@ -140,20 +140,6 @@ export default function AuthPage() {
               {loading ? 'Loading...' : tab === 'login' ? 'Login to PEX' : 'Create Account'}
             </button>
           </form>
-
-          {tab === 'register' && (
-            <div style={{
-              marginTop: 16,
-              padding: '10px 14px',
-              background: 'rgba(0,229,160,0.05)',
-              borderRadius: 'var(--radius)',
-              fontFamily: 'var(--font-mono)',
-              fontSize: 11,
-              color: 'var(--text3)',
-              lineHeight: 1.6
-            }}>
-            </div>
-          )}
         </div>
       </div>
     </div>
